@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="ppp_loan_lgl_dw" id="Snowflake-1d40" database="Snowflake" >
+	<comment><![CDATA[Analysis of the PPP Loans that were issued to Small Businesses during COVID-19.]]></comment>
+	<schema name="INSTANCE" catalogname="ppp_loan_lgl_dw" >
+		<table name="DIM_BORROWER" prior="dim_borrower" >
+			<column name="BORROWER_ID" prior="borrower_id" type="integer" jt="4" mandatory="y" />
+			<column name="BORROWER_NAME" prior="borrower_name" type="varchar" length="200" jt="12" />
+			<column name="BORROWER_ADDRESS" prior="borrower_address" type="varchar" length="200" jt="12" />
+			<column name="BORROWER_CITY" prior="borrower_city" type="varchar" length="100" jt="12" />
+			<column name="BORROWER_STATE" prior="borrower_state" type="varchar" length="100" jt="12" />
+			<column name="BORROWER_ZIP" prior="borrower_zip" type="varchar" length="100" jt="12" />
+			<column name="RACE" prior="race" type="varchar" length="100" jt="12" />
+			<column name="ETHNICITY" prior="ethnicity" type="varchar" length="100" jt="12" />
+			<column name="GENDER" prior="gender" type="varchar" length="100" jt="12" />
+			<column name="VETERAN" prior="veteran" type="boolean" jt="16" />
+			<column name="FRANCHISE_NAME" prior="franchise_name" type="varchar" length="200" jt="12" />
+			<column name="NONPROFIT" prior="nonprofit" type="boolean" jt="16" />
+			<column name="BUSINESS_TYPE" prior="business_type" type="varchar" jt="12" />
+			<column name="BUSINESS_AGE_DESCRIPTION" prior="business_age_description" type="varchar" length="200" jt="12" />
+			<column name="JOBS_REPORTED" prior="jobs_reported" type="integer" jt="4" />
+			<index name="PK_DIM_BORROWER" unique="PRIMARY_KEY" >
+				<column name="BORROWER_ID" />
+			</index>
+		</table>
+		<table name="DIM_DATE" prior="dim_date" >
+			<column name="DATE_ID" prior="date_id" type="integer" jt="4" mandatory="y" />
+			<column name="YEAR_NUMBER" prior="year_number" type="integer" jt="4" />
+			<column name="MONTH_NUMBER" prior="month_number" type="integer" jt="4" />
+			<column name="QUARTER_NUMBER" prior="quarter_number" type="integer" jt="4" />
+			<column name="DAY_NUMBER" prior="day_number" type="integer" jt="4" />
+			<column name="HOUR_NUMBER" prior="hour_number" type="integer" jt="4" />
+			<column name="ISHOLIDAY" prior="isholiday" type="boolean" jt="16" />
+			<column name="DAY_NAME" prior="day_name" type="varchar" length="100" jt="12" />
+			<column name="MONTH_NAME" prior="month_name" type="varchar" length="100" jt="12" />
+			<column name="WEEK_OF_MONTH" prior="week_of_month" type="integer" jt="4" />
+			<column name="WEEK_OF_YEAR" prior="week_of_year" type="integer" jt="4" />
+			<index name="PK_DIM_DATE" unique="PRIMARY_KEY" >
+				<column name="DATE_ID" />
+			</index>
+		</table>
+		<table name="DIM_GEOGRAPHY" prior="dim_geography" >
+			<column name="GEOFIPS" prior="geofips" type="integer" jt="4" mandatory="y" />
+			<column name="GEO_NAME" prior="geo_name" type="varchar" length="100" jt="12" />
+			<column name="REGION" prior="region" type="varchar" length="50" jt="12" />
+			<column name="PROJECT_COUNTY_NAME" prior="project_county_name" type="varchar" length="200" jt="12" />
+			<column name="PROJECT_STATE" prior="project_state" type="varchar" length="100" jt="12" />
+			<index name="PK_DIM_GEOGRAPHY" unique="PRIMARY_KEY" >
+				<column name="GEOFIPS" />
+			</index>
+		</table>
+		<table name="DIM_LOAN_STATUS" prior="dim_loan_status" >
+			<column name="LOAN_STATUS_ID" prior="loan_status_id" type="integer" jt="4" mandatory="y" />
+			<column name="LOAN_STATUS" prior="loan_status" type="varchar" length="100" jt="12" />
+			<index name="PK_DIM_LOAN_STATUS" unique="PRIMARY_KEY" >
+				<column name="LOAN_STATUS_ID" />
+			</index>
+		</table>
+		<table name="DIM_NAICS" prior="dim_naics" >
+			<column name="NAICS_CODE" prior="naics_code" type="integer" jt="4" mandatory="y" />
+			<column name="NAICS_TITLE" prior="naics_title" type="varchar" length="200" jt="12" />
+			<column name="DESCRIPTION" prior="description" type="text" jt="12" />
+			<index name="PK_NAICS_CODE" unique="PRIMARY_KEY" >
+				<column name="NAICS_CODE" />
+			</index>
+		</table>
+		<table name="DIM_ORIGINATING_LENDER" prior="dim_originating_lender" >
+			<column name="ORIGINATING_LENDER_ID" prior="originating_lender_id" type="integer" jt="4" mandatory="y" />
+			<column name="ORIGINATING_LENDER_LOCATION_ID" prior="originating_lender_location_id" type="integer" jt="4" />
+			<column name="ORIGINATING_LENDER" prior="originating_lender" type="varchar" length="200" jt="12" />
+			<column name="ORIGINATING_LENDER_CITY" prior="originating_lender_city" type="varchar" length="200" jt="12" />
+			<column name="ORIGINATING_LENDER_STATE" prior="originating_lender_state" type="varchar" length="100" jt="12" />
+			<index name="PK_DIM_ORIGINATING_LENDER" unique="PRIMARY_KEY" >
+				<column name="ORIGINATING_LENDER_ID" />
+			</index>
+		</table>
+		<table name="DIM_PROCESSING_METHOD" prior="dim_processing_method" >
+			<column name="PROCESSING_METHOD_ID" prior="processing_method_id" type="integer" jt="4" mandatory="y" />
+			<column name="PROCESSING_METHOD" prior="processing_method" type="varchar" length="100" jt="12" />
+			<index name="PK_DIM_PROCESSING_METHOD" unique="PRIMARY_KEY" >
+				<column name="PROCESSING_METHOD_ID" />
+			</index>
+		</table>
+		<table name="DIM_SBA_OFFICE" prior="dim_sba_office" >
+			<column name="SBA_OFFICE_CODE" prior="sba_office_code" type="integer" jt="4" mandatory="y" />
+			<index name="PK_DIM_SBA_OFFICE" unique="PRIMARY_KEY" >
+				<column name="SBA_OFFICE_CODE" />
+			</index>
+		</table>
+		<table name="DIM_SERVICING_LENDER" prior="dim_servicing_lender" >
+			<column name="SERVICING_LENDER_ID" prior="servicing_lender_id" type="integer" jt="4" mandatory="y" />
+			<column name="SERVICING_LENDER_LOCATION_ID" prior="servicing_lender_location_id" type="integer" jt="4" />
+			<column name="SERVICING_LENDER_NAME" prior="servicing_lender_name" type="varchar" length="200" jt="12" />
+			<column name="SERVICING_LENDER_ADDRESS" prior="servicing_lender_address" type="varchar" length="200" jt="12" />
+			<column name="SERVICING_LENDER_CITY" prior="servicing_lender_city" type="varchar" length="100" jt="12" />
+			<column name="SERVICING_LENDER_STATE" prior="servicing_lender_state" type="varchar" length="200" jt="12" />
+			<column name="SERVICING_LENDER_ZIP" prior="servicing_lender_zip" type="integer" jt="4" />
+			<index name="PK_DIM_SERVICING_LENDER" unique="PRIMARY_KEY" >
+				<column name="SERVICING_LENDER_ID" />
+			</index>
+		</table>
+		<table name="DIM_TERM" prior="dim_term" >
+			<column name="TERM_ID" prior="term_id" type="integer" jt="4" mandatory="y" />
+			<column name="TERM_MONTH" prior="term_month" type="integer" jt="4" />
+			<index name="PK_DIM_TERM" unique="PRIMARY_KEY" >
+				<column name="TERM_ID" />
+			</index>
+		</table>
+		<table name="FACTS_PPP" prior="facts_ppp" >
+			<column name="FACTS_ID" prior="facts_id" type="integer" jt="4" mandatory="y" />
+			<column name="LOAN_NUMBER" prior="loan_number" type="integer" jt="4" />
+			<column name="NAICS_CODE" prior="naics_code" type="integer" jt="4" mandatory="y" />
+			<column name="GEOFIPS" prior="geofips" type="integer" jt="4" mandatory="y" />
+			<column name="DATE_APPROVED_ID" prior="date_approved_id" type="integer" jt="4" mandatory="y" />
+			<column name="LOAN_STATUS_DATE_ID" prior="loan_status_date_id" type="integer" jt="4" mandatory="y" />
+			<column name="FORGIVENESS_DATE_ID" prior="forgiveness_date_id" type="integer" jt="4" mandatory="y" />
+			<column name="BORROWER_ID" prior="borrower_id" type="integer" jt="4" mandatory="y" />
+			<column name="ORIGINATING_LENDER_ID" prior="originating_lender_id" type="integer" jt="4" mandatory="y" />
+			<column name="SERVICING_LENDER_ID" prior="servicing_lender_id" type="integer" jt="4" mandatory="y" />
+			<column name="TERM_ID" prior="term_id" type="integer" jt="4" mandatory="y" />
+			<column name="LOAN_STATUS_ID" prior="loan_status_id" type="integer" jt="4" mandatory="y" />
+			<column name="PROCESSING_METHOD_ID" prior="processing_method_id" type="integer" jt="4" mandatory="y" />
+			<column name="SBA_OFFICE_CODE" prior="sba_office_code" type="integer" jt="4" mandatory="y" />
+			<column name="SBA_GUARANTY_PERCENTAGE" prior="sba_guaranty_percentage" type="double" jt="8" />
+			<column name="INITIAL_APPROVAL_AMOUNT" prior="initial_approval_amount" type="double" jt="8" />
+			<column name="CURRENT_APPROVAL_AMOUNT" prior="current_approval_amount" type="double" jt="8" />
+			<column name="UNDISBURSED_AMOUNT" prior="undisbursed_amount" type="double" jt="8" />
+			<column name="FORGIVENESS_AMOUNT" prior="forgiveness_amount" type="double" jt="8" />
+			<index name="PK_FACTS_PPP" unique="PRIMARY_KEY" >
+				<column name="FACTS_ID" />
+			</index>
+			<fk name="FK_FACTS_PPP_DIM_NAICS" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_NAICS" >
+				<fk_column name="NAICS_CODE" pk="NAICS_CODE" />
+			</fk>
+			<fk name="FK_FACTS_PPP_DIM_GEOGRAPHY" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_GEOGRAPHY" >
+				<fk_column name="GEOFIPS" pk="GEOFIPS" />
+			</fk>
+			<fk name="FK_FACTS_PPP_DIM_DATE" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_DATE" >
+				<fk_column name="DATE_APPROVED_ID" pk="DATE_ID" />
+			</fk>
+			<fk name="FK_FACTS_PPP_DIM_DATE_0" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_DATE" >
+				<fk_column name="LOAN_STATUS_DATE_ID" pk="DATE_ID" />
+			</fk>
+			<fk name="FK_FACTS_PPP_DIM_DATE_1" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_DATE" >
+				<fk_column name="FORGIVENESS_DATE_ID" pk="DATE_ID" />
+			</fk>
+			<fk name="FK_FACTS_PPP_DIM_BORROWER" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_BORROWER" >
+				<fk_column name="BORROWER_ID" pk="BORROWER_ID" />
+			</fk>
+			<fk name="FK_FACTS_PPP_DIM_ORIGINATING_LENDER" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_ORIGINATING_LENDER" >
+				<fk_column name="ORIGINATING_LENDER_ID" pk="ORIGINATING_LENDER_ID" />
+			</fk>
+			<fk name="FK_FACTS_PPP_DIM_SERVICING_LENDER" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_SERVICING_LENDER" >
+				<fk_column name="SERVICING_LENDER_ID" pk="SERVICING_LENDER_ID" />
+			</fk>
+			<fk name="FK_FACTS_PPP_DIM_TERM" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_TERM" >
+				<fk_column name="TERM_ID" pk="TERM_ID" />
+			</fk>
+			<fk name="FK_FACTS_PPP_DIM_LOAN_STATUS" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_LOAN_STATUS" >
+				<fk_column name="LOAN_STATUS_ID" pk="LOAN_STATUS_ID" />
+			</fk>
+			<fk name="FK_FACTS_PPP_DIM_PROCESSING_METHOD" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_PROCESSING_METHOD" >
+				<fk_column name="PROCESSING_METHOD_ID" pk="PROCESSING_METHOD_ID" />
+			</fk>
+			<fk name="FK_FACTS_PPP_DIM_SBA_OFFICE" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_SBA_OFFICE" >
+				<fk_column name="SBA_OFFICE_CODE" pk="SBA_OFFICE_CODE" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-2284" confirmed="y" show_relation="columns" >
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_BORROWER" color="C1D8EE" x="832" y="176" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_DATE" color="C1D8EE" x="560" y="144" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_GEOGRAPHY" color="C1D8EE" x="192" y="272" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_LOAN_STATUS" color="C1D8EE" x="144" y="512" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_NAICS" color="C1D8EE" x="192" y="640" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_ORIGINATING_LENDER" color="C1D8EE" x="256" y="864" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_PROCESSING_METHOD" color="C1D8EE" x="544" y="912" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SBA_OFFICE" color="C1D8EE" x="800" y="896" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SERVICING_LENDER" color="C1D8EE" x="976" y="832" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_TERM" color="C1D8EE" x="1008" y="688" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="FACTS_PPP" color="C1D8EE" x="576" y="496" />
+		<callout x="48" y="48" pointer="Round" >
+			<comment><![CDATA[This is a layout - a diagram with tools.
+- Create new entities by right-clicking the layout. 
+- Double-click entity headers to edit.
+- For a better understanding of the schema, create multiple layouts.
+- Deploy the model into the database by converting it first to the physical design.]]></comment>
+		</callout>
+		<script name="ppp_loan_sql.sql" id="Editor-16e" language="SQL" file="file:/C:/Users/banan/Downloads/ppp_loan_sql.sql" />
+	</layout>
+</project>

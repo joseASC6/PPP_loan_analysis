@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="ppp_loan_lgl_dw" id="Snowflake-1d40" database="Snowflake" >
+<project name="ppp_loan_lgl_dw" id="Snowflake-a81" database="Snowflake" >
 	<comment><![CDATA[Analysis of the PPP Loans that were issued to Small Businesses during COVID-19.]]></comment>
 	<schema name="INSTANCE" catalogname="ppp_loan_lgl_dw" >
 		<table name="DIM_BORROWER" prior="dim_borrower" >
@@ -15,11 +15,23 @@
 			<column name="VETERAN" prior="veteran" type="boolean" jt="16" />
 			<column name="FRANCHISE_NAME" prior="franchise_name" type="varchar" length="200" jt="12" />
 			<column name="NONPROFIT" prior="nonprofit" type="boolean" jt="16" />
-			<column name="BUSINESS_TYPE" prior="business_type" type="varchar" jt="12" />
-			<column name="BUSINESS_AGE_DESCRIPTION" prior="business_age_description" type="varchar" length="200" jt="12" />
 			<column name="JOBS_REPORTED" prior="jobs_reported" type="integer" jt="4" />
 			<index name="PK_DIM_BORROWER" unique="PRIMARY_KEY" >
 				<column name="BORROWER_ID" />
+			</index>
+		</table>
+		<table name="DIM_BUSINESS_AGE" prior="dim_business_age" >
+			<column name="BUSINESS_AGE_ID" prior="business_age_id" type="integer" jt="4" mandatory="y" />
+			<column name="BUSINESS_AGE_DESCRIPTION" prior="business_age_description" type="varchar" length="200" jt="12" />
+			<index name="PK_DIM_BUSINESS_AGE" unique="PRIMARY_KEY" >
+				<column name="BUSINESS_AGE_ID" />
+			</index>
+		</table>
+		<table name="DIM_BUSINESS_TYPE" prior="dim_business_type" >
+			<column name="BUSINESS_TYPE_ID" prior="business_type_id" type="integer" jt="4" mandatory="y" />
+			<column name="BUSINESS_TYPE" prior="business_type" type="varchar" length="200" jt="12" />
+			<index name="PK_DIM_BUSINESS_TYPE" unique="PRIMARY_KEY" >
+				<column name="BUSINESS_TYPE_ID" />
 			</index>
 		</table>
 		<table name="DIM_DATE" prior="dim_date" >
@@ -105,6 +117,24 @@
 				<column name="TERM_ID" />
 			</index>
 		</table>
+		<table name="ENTITY" prior="Entity" />
+		<table name="FACTS_GDP" prior="facts_gdp" >
+			<column name="FACTS_GDP_ID" prior="facts_gdp_id" type="integer" jt="4" mandatory="y" />
+			<column name="YEAR_ID" prior="year_id" type="integer" jt="4" mandatory="y" />
+			<column name="REAL_GDP" prior="real_gdp" type="number" jt="3" />
+			<column name="CHAIN_TYPE_INDEX_GDP" prior="chain_type_index_gdp" type="number" jt="3" />
+			<column name="CURRENT_DOLLAR_GDP" prior="current_dollar_gdp" type="number" jt="3" />
+			<column name="GEOFIPS" prior="geofips" type="integer" jt="4" mandatory="y" />
+			<index name="PK_FACTS_GDP" unique="PRIMARY_KEY" >
+				<column name="FACTS_GDP_ID" />
+			</index>
+			<fk name="FK_FACTS_GDP_DIM_GEOGRAPHY" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_GEOGRAPHY" >
+				<fk_column name="GEOFIPS" pk="GEOFIPS" />
+			</fk>
+			<fk name="FK_FACTS_GDP_DIM_DATE" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_DATE" >
+				<fk_column name="YEAR_ID" pk="DATE_ID" />
+			</fk>
+		</table>
 		<table name="FACTS_PPP" prior="facts_ppp" >
 			<column name="FACTS_ID" prior="facts_id" type="integer" jt="4" mandatory="y" />
 			<column name="LOAN_NUMBER" prior="loan_number" type="integer" jt="4" />
@@ -120,11 +150,13 @@
 			<column name="LOAN_STATUS_ID" prior="loan_status_id" type="integer" jt="4" mandatory="y" />
 			<column name="PROCESSING_METHOD_ID" prior="processing_method_id" type="integer" jt="4" mandatory="y" />
 			<column name="SBA_OFFICE_CODE" prior="sba_office_code" type="integer" jt="4" mandatory="y" />
-			<column name="SBA_GUARANTY_PERCENTAGE" prior="sba_guaranty_percentage" type="double" jt="8" />
-			<column name="INITIAL_APPROVAL_AMOUNT" prior="initial_approval_amount" type="double" jt="8" />
-			<column name="CURRENT_APPROVAL_AMOUNT" prior="current_approval_amount" type="double" jt="8" />
-			<column name="UNDISBURSED_AMOUNT" prior="undisbursed_amount" type="double" jt="8" />
-			<column name="FORGIVENESS_AMOUNT" prior="forgiveness_amount" type="double" jt="8" />
+			<column name="BUSINESS_AGE_ID" prior="business_age_id" type="integer" jt="4" mandatory="y" />
+			<column name="BUSINESS_TYPE_ID" prior="business_type_id" type="integer" jt="4" mandatory="y" />
+			<column name="SBA_GUARANTY_PERCENTAGE" prior="sba_guaranty_percentage" type="number" jt="3" />
+			<column name="INITIAL_APPROVAL_AMOUNT" prior="initial_approval_amount" type="number" jt="3" />
+			<column name="CURRENT_APPROVAL_AMOUNT" prior="current_approval_amount" type="number" jt="3" />
+			<column name="UNDISBURSED_AMOUNT" prior="undisbursed_amount" type="number" jt="3" />
+			<column name="FORGIVENESS_AMOUNT" prior="forgiveness_amount" type="number" jt="3" />
 			<index name="PK_FACTS_PPP" unique="PRIMARY_KEY" >
 				<column name="FACTS_ID" />
 			</index>
@@ -164,27 +196,28 @@
 			<fk name="FK_FACTS_PPP_DIM_SBA_OFFICE" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_SBA_OFFICE" >
 				<fk_column name="SBA_OFFICE_CODE" pk="SBA_OFFICE_CODE" />
 			</fk>
+			<fk name="FK_FACTS_PPP_DIM_BUSINESS_AGE" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_BUSINESS_AGE" >
+				<fk_column name="BUSINESS_AGE_ID" pk="BUSINESS_AGE_ID" />
+			</fk>
+			<fk name="FK_FACTS_PPP_DIM_BUSINESS_TYPE" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_BUSINESS_TYPE" >
+				<fk_column name="BUSINESS_TYPE_ID" pk="BUSINESS_TYPE_ID" />
+			</fk>
 		</table>
 	</schema>
-	<layout name="Default Layout" id="Layout-2284" confirmed="y" show_relation="columns" >
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_BORROWER" color="C1D8EE" x="832" y="176" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_DATE" color="C1D8EE" x="560" y="144" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_GEOGRAPHY" color="C1D8EE" x="192" y="272" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_LOAN_STATUS" color="C1D8EE" x="144" y="512" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_NAICS" color="C1D8EE" x="192" y="640" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_ORIGINATING_LENDER" color="C1D8EE" x="256" y="864" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_PROCESSING_METHOD" color="C1D8EE" x="544" y="912" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SBA_OFFICE" color="C1D8EE" x="800" y="896" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SERVICING_LENDER" color="C1D8EE" x="976" y="832" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_TERM" color="C1D8EE" x="1008" y="688" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="FACTS_PPP" color="C1D8EE" x="576" y="496" />
-		<callout x="48" y="48" pointer="Round" >
-			<comment><![CDATA[This is a layout - a diagram with tools.
-- Create new entities by right-clicking the layout. 
-- Double-click entity headers to edit.
-- For a better understanding of the schema, create multiple layouts.
-- Deploy the model into the database by converting it first to the physical design.]]></comment>
-		</callout>
-		<script name="ppp_loan_sql.sql" id="Editor-16e" language="SQL" file="file:/C:/Users/banan/Downloads/ppp_loan_sql.sql" />
+	<layout name="Default Layout" id="Layout-1865" confirmed="y" show_relation="columns" >
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_BORROWER" color="C1D8EE" x="736" y="448" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_BUSINESS_AGE" color="C1D8EE" x="720" y="816" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_BUSINESS_TYPE" color="C1D8EE" x="928" y="720" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_DATE" color="C1D8EE" x="320" y="48" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_GEOGRAPHY" color="C1D8EE" x="560" y="64" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_LOAN_STATUS" color="C1D8EE" x="80" y="416" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_NAICS" color="C1D8EE" x="80" y="528" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_ORIGINATING_LENDER" color="C1D8EE" x="48" y="656" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_PROCESSING_METHOD" color="C1D8EE" x="80" y="816" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SBA_OFFICE" color="C1D8EE" x="608" y="912" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SERVICING_LENDER" color="C1D8EE" x="304" y="896" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_TERM" color="C1D8EE" x="96" y="272" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="FACTS_GDP" color="C1D8EE" x="720" y="272" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="FACTS_PPP" color="C1D8EE" x="400" y="384" />
 	</layout>
 </project>
