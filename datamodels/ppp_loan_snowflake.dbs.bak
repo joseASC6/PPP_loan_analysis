@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="ppp_loan_lgl_dw" id="Snowflake-1d40" database="Snowflake" >
+<project name="ppp_loan_lgl_dw" id="Snowflake-a81" database="Snowflake" >
 	<comment><![CDATA[Analysis of the PPP Loans that were issued to Small Businesses during COVID-19.]]></comment>
 	<schema name="INSTANCE" catalogname="ppp_loan_lgl_dw" >
 		<table name="DIM_BORROWER" prior="dim_borrower" >
@@ -15,11 +15,23 @@
 			<column name="VETERAN" prior="veteran" type="boolean" jt="16" />
 			<column name="FRANCHISE_NAME" prior="franchise_name" type="varchar" length="200" jt="12" />
 			<column name="NONPROFIT" prior="nonprofit" type="boolean" jt="16" />
-			<column name="BUSINESS_TYPE" prior="business_type" type="varchar" jt="12" />
-			<column name="BUSINESS_AGE_DESCRIPTION" prior="business_age_description" type="varchar" length="200" jt="12" />
 			<column name="JOBS_REPORTED" prior="jobs_reported" type="integer" jt="4" />
 			<index name="PK_DIM_BORROWER" unique="PRIMARY_KEY" >
 				<column name="BORROWER_ID" />
+			</index>
+		</table>
+		<table name="DIM_BUSINESS_AGE" prior="dim_business_age" >
+			<column name="BUSINESS_AGE_ID" prior="business_age_id" type="integer" jt="4" mandatory="y" />
+			<column name="BUSINESS_AGE_DESCRIPTION" prior="business_age_description" type="varchar" length="200" jt="12" />
+			<index name="PK_DIM_BUSINESS_AGE" unique="PRIMARY_KEY" >
+				<column name="BUSINESS_AGE_ID" />
+			</index>
+		</table>
+		<table name="DIM_BUSINESS_TYPE" prior="dim_business_type" >
+			<column name="BUSINESS_TYPE_ID" prior="business_type_id" type="integer" jt="4" mandatory="y" />
+			<column name="BUSINESS_TYPE" prior="business_type" type="varchar" length="200" jt="12" />
+			<index name="PK_DIM_BUSINESS_TYPE" unique="PRIMARY_KEY" >
+				<column name="BUSINESS_TYPE_ID" />
 			</index>
 		</table>
 		<table name="DIM_DATE" prior="dim_date" >
@@ -105,8 +117,26 @@
 				<column name="TERM_ID" />
 			</index>
 		</table>
+		<table name="ENTITY" prior="Entity" />
+		<table name="FACTS_GDP" prior="facts_gdp" >
+			<column name="FACTS_GDP_ID" prior="facts_gdp_id" type="integer" jt="4" mandatory="y" />
+			<column name="YEAR_ID" prior="year_id" type="integer" jt="4" mandatory="y" />
+			<column name="REAL_GDP" prior="real_gdp" type="number" jt="3" />
+			<column name="CHAIN_TYPE_INDEX_GDP" prior="chain_type_index_gdp" type="number" jt="3" />
+			<column name="CURRENT_DOLLAR_GDP" prior="current_dollar_gdp" type="number" jt="3" />
+			<column name="GEOFIPS" prior="geofips" type="integer" jt="4" mandatory="y" />
+			<index name="PK_FACTS_GDP" unique="PRIMARY_KEY" >
+				<column name="FACTS_GDP_ID" />
+			</index>
+			<fk name="FK_FACTS_GDP_DIM_GEOGRAPHY" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_GEOGRAPHY" >
+				<fk_column name="GEOFIPS" pk="GEOFIPS" />
+			</fk>
+			<fk name="FK_FACTS_GDP_DIM_DATE" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_DATE" >
+				<fk_column name="YEAR_ID" pk="DATE_ID" />
+			</fk>
+		</table>
 		<table name="FACTS_PPP" prior="facts_ppp" >
-			<column name="FACTS_ID" prior="facts_id" type="integer" jt="4" mandatory="y" />
+			<column name="FACTS_PPP_ID" prior="FACTS_ID" type="integer" jt="4" mandatory="y" />
 			<column name="LOAN_NUMBER" prior="loan_number" type="integer" jt="4" />
 			<column name="NAICS_CODE" prior="naics_code" type="integer" jt="4" mandatory="y" />
 			<column name="GEOFIPS" prior="geofips" type="integer" jt="4" mandatory="y" />
@@ -120,13 +150,15 @@
 			<column name="LOAN_STATUS_ID" prior="loan_status_id" type="integer" jt="4" mandatory="y" />
 			<column name="PROCESSING_METHOD_ID" prior="processing_method_id" type="integer" jt="4" mandatory="y" />
 			<column name="SBA_OFFICE_CODE" prior="sba_office_code" type="integer" jt="4" mandatory="y" />
-			<column name="SBA_GUARANTY_PERCENTAGE" prior="sba_guaranty_percentage" type="double" jt="8" />
-			<column name="INITIAL_APPROVAL_AMOUNT" prior="initial_approval_amount" type="double" jt="8" />
-			<column name="CURRENT_APPROVAL_AMOUNT" prior="current_approval_amount" type="double" jt="8" />
-			<column name="UNDISBURSED_AMOUNT" prior="undisbursed_amount" type="double" jt="8" />
-			<column name="FORGIVENESS_AMOUNT" prior="forgiveness_amount" type="double" jt="8" />
+			<column name="BUSINESS_AGE_ID" prior="business_age_id" type="integer" jt="4" mandatory="y" />
+			<column name="BUSINESS_TYPE_ID" prior="business_type_id" type="integer" jt="4" mandatory="y" />
+			<column name="SBA_GUARANTY_PERCENTAGE" prior="sba_guaranty_percentage" type="number" jt="3" />
+			<column name="INITIAL_APPROVAL_AMOUNT" prior="initial_approval_amount" type="number" jt="3" />
+			<column name="CURRENT_APPROVAL_AMOUNT" prior="current_approval_amount" type="number" jt="3" />
+			<column name="UNDISBURSED_AMOUNT" prior="undisbursed_amount" type="number" jt="3" />
+			<column name="FORGIVENESS_AMOUNT" prior="forgiveness_amount" type="number" jt="3" />
 			<index name="PK_FACTS_PPP" unique="PRIMARY_KEY" >
-				<column name="FACTS_ID" />
+				<column name="FACTS_PPP_ID" />
 			</index>
 			<fk name="FK_FACTS_PPP_DIM_NAICS" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_NAICS" >
 				<fk_column name="NAICS_CODE" pk="NAICS_CODE" />
@@ -164,27 +196,206 @@
 			<fk name="FK_FACTS_PPP_DIM_SBA_OFFICE" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_SBA_OFFICE" >
 				<fk_column name="SBA_OFFICE_CODE" pk="SBA_OFFICE_CODE" />
 			</fk>
+			<fk name="FK_FACTS_PPP_DIM_BUSINESS_AGE" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_BUSINESS_AGE" >
+				<fk_column name="BUSINESS_AGE_ID" pk="BUSINESS_AGE_ID" />
+			</fk>
+			<fk name="FK_FACTS_PPP_DIM_BUSINESS_TYPE" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_BUSINESS_TYPE" >
+				<fk_column name="BUSINESS_TYPE_ID" pk="BUSINESS_TYPE_ID" />
+			</fk>
 		</table>
 	</schema>
-	<layout name="Default Layout" id="Layout-2284" confirmed="y" show_relation="columns" >
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_BORROWER" color="C1D8EE" x="832" y="176" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_DATE" color="C1D8EE" x="560" y="144" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_GEOGRAPHY" color="C1D8EE" x="192" y="272" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_LOAN_STATUS" color="C1D8EE" x="144" y="512" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_NAICS" color="C1D8EE" x="192" y="640" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_ORIGINATING_LENDER" color="C1D8EE" x="256" y="864" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_PROCESSING_METHOD" color="C1D8EE" x="544" y="912" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SBA_OFFICE" color="C1D8EE" x="800" y="896" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SERVICING_LENDER" color="C1D8EE" x="976" y="832" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_TERM" color="C1D8EE" x="1008" y="688" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="FACTS_PPP" color="C1D8EE" x="576" y="496" />
-		<callout x="48" y="48" pointer="Round" >
-			<comment><![CDATA[This is a layout - a diagram with tools.
-- Create new entities by right-clicking the layout. 
-- Double-click entity headers to edit.
-- For a better understanding of the schema, create multiple layouts.
-- Deploy the model into the database by converting it first to the physical design.]]></comment>
-		</callout>
-		<script name="ppp_loan_sql.sql" id="Editor-16e" language="SQL" file="file:/C:/Users/banan/Downloads/ppp_loan_sql.sql" />
+	<layout name="Default Layout" id="Layout-1865" confirmed="y" show_relation="columns" >
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_BORROWER" color="C1D8EE" x="736" y="448" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_BUSINESS_AGE" color="C1D8EE" x="720" y="816" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_BUSINESS_TYPE" color="C1D8EE" x="928" y="720" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_DATE" color="C1D8EE" x="320" y="48" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_GEOGRAPHY" color="C1D8EE" x="560" y="64" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_LOAN_STATUS" color="C1D8EE" x="80" y="416" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_NAICS" color="C1D8EE" x="80" y="528" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_ORIGINATING_LENDER" color="C1D8EE" x="48" y="656" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_PROCESSING_METHOD" color="C1D8EE" x="80" y="816" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SBA_OFFICE" color="C1D8EE" x="608" y="912" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SERVICING_LENDER" color="C1D8EE" x="304" y="896" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_TERM" color="C1D8EE" x="96" y="272" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="FACTS_GDP" color="C1D8EE" x="720" y="272" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="FACTS_PPP" color="C1D8EE" x="400" y="384" />
+		<script name="SQL_Editor" id="Editor-2224" language="SQL" >
+			<string><![CDATA[CREATE SCHEMA INSTANCE;
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.DIM_BORROWER ( 
+	BORROWER_ID          integer NOT NULL   ,
+	BORROWER_NAME        varchar(200)    ,
+	BORROWER_ADDRESS     varchar(200)    ,
+	BORROWER_CITY        varchar(100)    ,
+	BORROWER_STATE       varchar(100)    ,
+	BORROWER_ZIP         varchar(100)    ,
+	RACE                 varchar(100)    ,
+	ETHNICITY            varchar(100)    ,
+	GENDER               varchar(100)    ,
+	VETERAN              boolean    ,
+	FRANCHISE_NAME       varchar(200)    ,
+	NONPROFIT            boolean    ,
+	JOBS_REPORTED        integer    ,
+	CONSTRAINT PK_DIM_BORROWER PRIMARY KEY ( BORROWER_ID )
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.DIM_BUSINESS_AGE ( 
+	BUSINESS_AGE_ID      integer NOT NULL   ,
+	BUSINESS_AGE_DESCRIPTION varchar(200)    ,
+	CONSTRAINT PK_DIM_BUSINESS_AGE PRIMARY KEY ( BUSINESS_AGE_ID )
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.DIM_BUSINESS_TYPE ( 
+	BUSINESS_TYPE_ID     integer NOT NULL   ,
+	BUSINESS_TYPE        varchar(200)    ,
+	CONSTRAINT PK_DIM_BUSINESS_TYPE PRIMARY KEY ( BUSINESS_TYPE_ID )
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.DIM_DATE ( 
+	DATE_ID              integer NOT NULL   ,
+	YEAR_NUMBER          integer    ,
+	MONTH_NUMBER         integer    ,
+	QUARTER_NUMBER       integer    ,
+	DAY_NUMBER           integer    ,
+	HOUR_NUMBER          integer    ,
+	ISHOLIDAY            boolean    ,
+	DAY_NAME             varchar(100)    ,
+	MONTH_NAME           varchar(100)    ,
+	WEEK_OF_MONTH        integer    ,
+	WEEK_OF_YEAR         integer    ,
+	CONSTRAINT PK_DIM_DATE PRIMARY KEY ( DATE_ID )
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.DIM_GEOGRAPHY ( 
+	GEOFIPS              integer NOT NULL   ,
+	GEO_NAME             varchar(100)    ,
+	REGION               varchar(50)    ,
+	PROJECT_COUNTY_NAME  varchar(200)    ,
+	PROJECT_STATE        varchar(100)    ,
+	CONSTRAINT PK_DIM_GEOGRAPHY PRIMARY KEY ( GEOFIPS )
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.DIM_LOAN_STATUS ( 
+	LOAN_STATUS_ID       integer NOT NULL   ,
+	LOAN_STATUS          varchar(100)    ,
+	CONSTRAINT PK_DIM_LOAN_STATUS PRIMARY KEY ( LOAN_STATUS_ID )
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.DIM_NAICS ( 
+	NAICS_CODE           integer NOT NULL   ,
+	NAICS_TITLE          varchar(200)    ,
+	DESCRIPTION          text    ,
+	CONSTRAINT PK_NAICS_CODE PRIMARY KEY ( NAICS_CODE )
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.DIM_ORIGINATING_LENDER ( 
+	ORIGINATING_LENDER_ID integer NOT NULL   ,
+	ORIGINATING_LENDER_LOCATION_ID integer    ,
+	ORIGINATING_LENDER   varchar(200)    ,
+	ORIGINATING_LENDER_CITY varchar(200)    ,
+	ORIGINATING_LENDER_STATE varchar(100)    ,
+	CONSTRAINT PK_DIM_ORIGINATING_LENDER PRIMARY KEY ( ORIGINATING_LENDER_ID )
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.DIM_PROCESSING_METHOD ( 
+	PROCESSING_METHOD_ID integer NOT NULL   ,
+	PROCESSING_METHOD    varchar(100)    ,
+	CONSTRAINT PK_DIM_PROCESSING_METHOD PRIMARY KEY ( PROCESSING_METHOD_ID )
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.DIM_SBA_OFFICE ( 
+	SBA_OFFICE_CODE      integer NOT NULL   ,
+	CONSTRAINT PK_DIM_SBA_OFFICE PRIMARY KEY ( SBA_OFFICE_CODE )
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.DIM_SERVICING_LENDER ( 
+	SERVICING_LENDER_ID  integer NOT NULL   ,
+	SERVICING_LENDER_LOCATION_ID integer    ,
+	SERVICING_LENDER_NAME varchar(200)    ,
+	SERVICING_LENDER_ADDRESS varchar(200)    ,
+	SERVICING_LENDER_CITY varchar(100)    ,
+	SERVICING_LENDER_STATE varchar(200)    ,
+	SERVICING_LENDER_ZIP integer    ,
+	CONSTRAINT PK_DIM_SERVICING_LENDER PRIMARY KEY ( SERVICING_LENDER_ID )
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.DIM_TERM ( 
+	TERM_ID              integer NOT NULL   ,
+	TERM_MONTH           integer    ,
+	CONSTRAINT PK_DIM_TERM PRIMARY KEY ( TERM_ID )
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.ENTITY ( 
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_GDP ( 
+	FACTS_GDP_ID         integer NOT NULL   ,
+	YEAR_ID              integer NOT NULL   ,
+	REAL_GDP             number    ,
+	CHAIN_TYPE_INDEX_GDP number    ,
+	CURRENT_DOLLAR_GDP   number    ,
+	GEOFIPS              integer NOT NULL   ,
+	CONSTRAINT PK_FACTS_GDP PRIMARY KEY ( FACTS_GDP_ID )
+ );
+
+CREATE  TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ( 
+	FACTS_PPP_ID         integer NOT NULL   ,
+	LOAN_NUMBER          integer    ,
+	NAICS_CODE           integer NOT NULL   ,
+	GEOFIPS              integer NOT NULL   ,
+	DATE_APPROVED_ID     integer NOT NULL   ,
+	LOAN_STATUS_DATE_ID  integer NOT NULL   ,
+	FORGIVENESS_DATE_ID  integer NOT NULL   ,
+	BORROWER_ID          integer NOT NULL   ,
+	ORIGINATING_LENDER_ID integer NOT NULL   ,
+	SERVICING_LENDER_ID  integer NOT NULL   ,
+	TERM_ID              integer NOT NULL   ,
+	LOAN_STATUS_ID       integer NOT NULL   ,
+	PROCESSING_METHOD_ID integer NOT NULL   ,
+	SBA_OFFICE_CODE      integer NOT NULL   ,
+	BUSINESS_AGE_ID      integer NOT NULL   ,
+	BUSINESS_TYPE_ID     integer NOT NULL   ,
+	SBA_GUARANTY_PERCENTAGE number    ,
+	INITIAL_APPROVAL_AMOUNT number    ,
+	CURRENT_APPROVAL_AMOUNT number    ,
+	UNDISBURSED_AMOUNT   number    ,
+	FORGIVENESS_AMOUNT   number    ,
+	CONSTRAINT PK_FACTS_PPP PRIMARY KEY ( FACTS_PPP_ID )
+ );
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_GDP ADD CONSTRAINT FK_FACTS_GDP_DIM_GEOGRAPHY FOREIGN KEY ( GEOFIPS ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_GEOGRAPHY( GEOFIPS ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_GDP ADD CONSTRAINT FK_FACTS_GDP_DIM_DATE FOREIGN KEY ( YEAR_ID ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_DATE( DATE_ID ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_NAICS FOREIGN KEY ( NAICS_CODE ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_NAICS( NAICS_CODE ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_GEOGRAPHY FOREIGN KEY ( GEOFIPS ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_GEOGRAPHY( GEOFIPS ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_DATE FOREIGN KEY ( DATE_APPROVED_ID ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_DATE( DATE_ID ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_DATE_0 FOREIGN KEY ( LOAN_STATUS_DATE_ID ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_DATE( DATE_ID ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_DATE_1 FOREIGN KEY ( FORGIVENESS_DATE_ID ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_DATE( DATE_ID ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_BORROWER FOREIGN KEY ( BORROWER_ID ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_BORROWER( BORROWER_ID ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_ORIGINATING_LENDER FOREIGN KEY ( ORIGINATING_LENDER_ID ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_ORIGINATING_LENDER( ORIGINATING_LENDER_ID ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_SERVICING_LENDER FOREIGN KEY ( SERVICING_LENDER_ID ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_SERVICING_LENDER( SERVICING_LENDER_ID ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_TERM FOREIGN KEY ( TERM_ID ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_TERM( TERM_ID ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_LOAN_STATUS FOREIGN KEY ( LOAN_STATUS_ID ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_LOAN_STATUS( LOAN_STATUS_ID ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_PROCESSING_METHOD FOREIGN KEY ( PROCESSING_METHOD_ID ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_PROCESSING_METHOD( PROCESSING_METHOD_ID ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_SBA_OFFICE FOREIGN KEY ( SBA_OFFICE_CODE ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_SBA_OFFICE( SBA_OFFICE_CODE ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_BUSINESS_AGE FOREIGN KEY ( BUSINESS_AGE_ID ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_BUSINESS_AGE( BUSINESS_AGE_ID ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE "ppp_loan_lgl_dw".INSTANCE.FACTS_PPP ADD CONSTRAINT FK_FACTS_PPP_DIM_BUSINESS_TYPE FOREIGN KEY ( BUSINESS_TYPE_ID ) REFERENCES "ppp_loan_lgl_dw".INSTANCE.DIM_BUSINESS_TYPE( BUSINESS_TYPE_ID ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+]]></string>
+		</script>
+		<script name="ppp_loan_sql.sql" id="Editor-141e" language="SQL" file="file:/C:/Users/banan/Downloads/ppp_loan_sql.sql" />
 	</layout>
 </project>

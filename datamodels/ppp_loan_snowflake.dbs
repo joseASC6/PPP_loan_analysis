@@ -136,7 +136,7 @@
 			</fk>
 		</table>
 		<table name="FACTS_PPP" prior="facts_ppp" >
-			<column name="FACTS_ID" prior="facts_id" type="integer" jt="4" mandatory="y" />
+			<column name="FACTS_PPP_ID" prior="FACTS_ID" type="integer" jt="4" mandatory="y" />
 			<column name="LOAN_NUMBER" prior="loan_number" type="integer" jt="4" />
 			<column name="NAICS_CODE" prior="naics_code" type="integer" jt="4" mandatory="y" />
 			<column name="GEOFIPS" prior="geofips" type="integer" jt="4" mandatory="y" />
@@ -158,7 +158,7 @@
 			<column name="UNDISBURSED_AMOUNT" prior="undisbursed_amount" type="number" jt="3" />
 			<column name="FORGIVENESS_AMOUNT" prior="forgiveness_amount" type="number" jt="3" />
 			<index name="PK_FACTS_PPP" unique="PRIMARY_KEY" >
-				<column name="FACTS_ID" />
+				<column name="FACTS_PPP_ID" />
 			</index>
 			<fk name="FK_FACTS_PPP_DIM_NAICS" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="DIM_NAICS" >
 				<fk_column name="NAICS_CODE" pk="NAICS_CODE" />
@@ -219,5 +219,7 @@
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_TERM" color="C1D8EE" x="96" y="272" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="FACTS_GDP" color="C1D8EE" x="720" y="272" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="FACTS_PPP" color="C1D8EE" x="400" y="384" />
+		<script name="ppp_loan_sql.sql" id="Editor-2224" language="SQL" file="file:/C:/Users/banan/Downloads/ppp_loan_sql.sql" />
+		<script name="ppp_loan_sql.sql" id="Editor-141e" language="SQL" file="file:/C:/Users/banan/Downloads/ppp_loan_sql.sql" />
 	</layout>
 </project>

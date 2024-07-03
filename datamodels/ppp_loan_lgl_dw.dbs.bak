@@ -214,7 +214,7 @@
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_naics" color="C1D8EE" x="80" y="528" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_originating_lender" color="C1D8EE" x="48" y="656" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_processing_method" color="C1D8EE" x="80" y="816" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_sba_office" color="C1D8EE" x="672" y="896" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_sba_office" color="C1D8EE" x="672" y="928" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_servicing_lender" color="C1D8EE" x="448" y="896" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_term" color="C1D8EE" x="96" y="272" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="facts_gdp" color="C1D8EE" x="720" y="272" />
