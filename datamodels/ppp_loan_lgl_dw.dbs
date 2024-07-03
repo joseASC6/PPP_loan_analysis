@@ -167,23 +167,16 @@
 		</table>
 	</schema>
 	<layout name="Default Layout" id="Layout-1356" show_relation="columns" >
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_borrower" color="C1D8EE" x="832" y="176" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_date" color="C1D8EE" x="560" y="144" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_geography" color="C1D8EE" x="192" y="272" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_loan_status" color="C1D8EE" x="144" y="512" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_naics" color="C1D8EE" x="192" y="640" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_originating_lender" color="C1D8EE" x="256" y="864" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_processing_method" color="C1D8EE" x="544" y="912" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_sba_office" color="C1D8EE" x="800" y="896" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_servicing_lender" color="C1D8EE" x="976" y="832" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_term" color="C1D8EE" x="1008" y="688" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="facts_ppp" color="C1D8EE" x="576" y="496" />
-		<callout x="48" y="48" pointer="Round" >
-			<comment><![CDATA[This is a layout - a diagram with tools.
-- Create new entities by right-clicking the layout. 
-- Double-click entity headers to edit.
-- For a better understanding of the schema, create multiple layouts.
-- Deploy the model into the database by converting it first to the physical design.]]></comment>
-		</callout>
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_borrower" color="C1D8EE" x="736" y="80" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_date" color="C1D8EE" x="464" y="48" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_geography" color="C1D8EE" x="96" y="176" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_loan_status" color="C1D8EE" x="48" y="416" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_naics" color="C1D8EE" x="96" y="544" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_originating_lender" color="C1D8EE" x="160" y="768" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_processing_method" color="C1D8EE" x="448" y="816" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_sba_office" color="C1D8EE" x="704" y="800" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_servicing_lender" color="C1D8EE" x="880" y="736" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_term" color="C1D8EE" x="912" y="592" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="facts_ppp" color="C1D8EE" x="480" y="400" />
 	</layout>
 </project>
