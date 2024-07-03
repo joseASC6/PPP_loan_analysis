@@ -2,6 +2,7 @@
 <project name="ppp_loan_lgl_dw" id="LogicalDesign-2124" database="LogicalDesign" >
 	<comment><![CDATA[Analysis of the PPP Loans that were issued to Small Businesses during COVID-19.]]></comment>
 	<schema name="INSTANCE" catalogname="ppp_loan_lgl_dw" >
+		<table name="Entity" />
 		<table name="dim_borrower" prior="Entity" >
 			<column name="borrower_id" type="INT" jt="4" mandatory="y" />
 			<column name="borrower_name" type="VARCHAR" length="200" jt="12" />
@@ -105,6 +106,23 @@
 				<column name="term_id" />
 			</index>
 		</table>
+		<table name="facts_gdp" prior="facts_" >
+			<column name="facts_gdp_id" type="INT" jt="4" mandatory="y" />
+			<column name="year_id" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="real_gdp" type="DECIMAL" jt="3" />
+			<column name="chain_type_index_gdp" type="DECIMAL" jt="3" />
+			<column name="current_dollar_gdp" type="DECIMAL" jt="3" />
+			<column name="geofips" type="INT" jt="4" mandatory="y" />
+			<index name="pk_facts_gdp" unique="PRIMARY_KEY" >
+				<column name="facts_gdp_id" />
+			</index>
+			<fk name="fk_facts_gdp_dim_geography" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="dim_geography" type="NonIdentifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="geofips" pk="geofips" />
+			</fk>
+			<fk name="fk_facts_gdp_dim_date" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="dim_date" type="NonIdentifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="year_id" pk="date_id" />
+			</fk>
+		</table>
 		<table name="facts_ppp" prior="Entity" >
 			<column name="facts_id" type="BIGINT" jt="-5" mandatory="y" />
 			<column name="loan_number" type="INT" jt="4" />
@@ -121,10 +139,10 @@
 			<column name="processing_method_id" type="INT" jt="4" mandatory="y" />
 			<column name="sba_office_code" type="INT" jt="4" mandatory="y" />
 			<column name="sba_guaranty_percentage" type="DOUBLE" jt="8" />
-			<column name="initial_approval_amount" type="MONEY" jt="3" />
-			<column name="current_approval_amount" type="MONEY" jt="3" />
-			<column name="undisbursed_amount" type="MONEY" jt="3" />
-			<column name="forgiveness_amount" type="MONEY" jt="3" />
+			<column name="initial_approval_amount" type="DECIMAL" jt="3" />
+			<column name="current_approval_amount" type="DECIMAL" jt="3" />
+			<column name="undisbursed_amount" type="DECIMAL" jt="3" />
+			<column name="forgiveness_amount" type="DECIMAL" jt="3" />
 			<index name="pk_facts_ppp" unique="PRIMARY_KEY" >
 				<column name="facts_id" />
 			</index>
@@ -167,23 +185,17 @@
 		</table>
 	</schema>
 	<layout name="Default Layout" id="Layout-1356" show_relation="columns" >
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_borrower" color="C1D8EE" x="832" y="176" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_date" color="C1D8EE" x="560" y="144" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_geography" color="C1D8EE" x="192" y="272" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_loan_status" color="C1D8EE" x="144" y="512" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_naics" color="C1D8EE" x="192" y="640" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_originating_lender" color="C1D8EE" x="256" y="864" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_processing_method" color="C1D8EE" x="544" y="912" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_sba_office" color="C1D8EE" x="800" y="896" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_servicing_lender" color="C1D8EE" x="976" y="832" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_term" color="C1D8EE" x="1008" y="688" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="facts_ppp" color="C1D8EE" x="576" y="496" />
-		<callout x="48" y="48" pointer="Round" >
-			<comment><![CDATA[This is a layout - a diagram with tools.
-- Create new entities by right-clicking the layout. 
-- Double-click entity headers to edit.
-- For a better understanding of the schema, create multiple layouts.
-- Deploy the model into the database by converting it first to the physical design.]]></comment>
-		</callout>
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_borrower" color="C1D8EE" x="864" y="112" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_date" color="C1D8EE" x="464" y="48" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_geography" color="C1D8EE" x="96" y="176" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_loan_status" color="C1D8EE" x="48" y="416" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_naics" color="C1D8EE" x="96" y="544" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_originating_lender" color="C1D8EE" x="160" y="768" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_processing_method" color="C1D8EE" x="448" y="816" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_sba_office" color="C1D8EE" x="720" y="880" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_servicing_lender" color="C1D8EE" x="944" y="816" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="dim_term" color="C1D8EE" x="288" y="112" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="facts_gdp" color="C1D8EE" x="832" y="576" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="facts_ppp" color="C1D8EE" x="416" y="400" />
 	</layout>
 </project>
