@@ -1,0 +1,4 @@
+{
+    "AZURE_CONNECTION_STRING" : "DefaultEndpointsProtocol=https;AccountName=stppp;AccountKey=C9WQEfBqsnPFkMwXCIrvq7UDVPaJQ1gae2MPUz5bReFvB/gEC9+tvvD+yKYZ7gop6Pb4EpehumFO+ASthdmY4g==;EndpointSuffix=core.windows.net",
+    "DW_CONNECTION_STRING" : ""
+}
