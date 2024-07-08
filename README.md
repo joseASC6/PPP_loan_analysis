@@ -23,9 +23,9 @@ By Jose Garcia, Erika Chunzho and Gelbert Ramos
 ## Business Problem
 
 #### Context and Business Problem
-    During the COVID-19 pandemic, the U.S. government established the Paycheck Protection Program (PPP). The program provided loans to small businesses to help them maintain their workforce during the pandemic. Most loans were forgivable if used primarily for payroll and other specified business expenses like utilities.
+During the COVID-19 pandemic, the U.S. government established the Paycheck Protection Program (PPP). The program provided loans to small businesses to help them maintain their workforce during the pandemic. Most loans were forgivable if used primarily for payroll and other specified business expenses like utilities.
 
-    The PPP was designed to provide rapid financial assistance to small businesses nationwide. However, this rapid deployment raised concerns about the program's effectiveness and equitable distribution of funds. The PPP faced several challenges, including eligibility issues, fraud, and disparities in loan distribution among different demographic groups and geographic areas.
+The PPP was designed to provide rapid financial assistance to small businesses nationwide. However, this rapid deployment raised concerns about the program's effectiveness and equitable distribution of funds. The PPP faced several challenges, including eligibility issues, fraud, and disparities in loan distribution among different demographic groups and geographic areas.
 
 ### Business Requirements
 #### The primary business problems this analysis aims to address are:
@@ -36,7 +36,7 @@ By Jose Garcia, Erika Chunzho and Gelbert Ramos
 3. Assessing the Effectiveness and Impact of the PPP Loan Program:
     * Evaluate how well the PPP loans supported business survival and recovery during the COVID-19 pandemic.
 
-#### Key Performance Indicators (KPIs):Establish metrics for business success
+#### Key Performance Indicators (KPIs): Establish metrics for business success
 1. Loan-to-GDP Ratio: Measures the proportion of PPP loans relative to the economic output of counties and states.
     * Ratio to compare the total loan amount allocated vs GDP by county and states
     * (Total Loan Amount / GDP) * 100
@@ -52,7 +52,7 @@ By Jose Garcia, Erika Chunzho and Gelbert Ramos
 3. Report on top lenders, industries, and geographic areas based on loan portfolios
 4. Analyze the correlation between PPP loans and economic indicators like GDP
  
-### Requirements:
+##### Requirements:
     1. Must have
         a. Total loan by companies
         b. Total loan by State
@@ -76,3 +76,12 @@ By Jose Garcia, Erika Chunzho and Gelbert Ramos
         a. Long-term business performance tracking: Would need access to    ongoing financial data for loan recipients
         Integration with real-time economic indicators
         b. Fraud detection analysis
+
+## Business Impact
+Analyzing PPP loans issued to small businesses during COVID-19 significantly impacts stakeholders, including government agencies, financial institutions, policymakers, and small business owners. The project's impacts include its risks, costs, and benefits.  
+
+This project's risks include data quality issues and privacy concerns. Some PPP loan data is incomplete, missing, or inconsistent from the rest, which could lead to a flawed or inaccurate conclusion. In addition, the PPP data contains sensitive information about the business owners. This project must ensure that it protects and secures this information.
+
+The cost of building the BI solutions is estimated at $40,000. The project is estimated to take 480 hours, and each team member will be paid $50 per hour, resulting in total labor costs of $32,000. In addition, the project includes $4,000 for software and tools, $2,000 for data acquisitions, and $2,000 for the project documentation.
+
+Lastly, project benefits include data-driven decision-making for future economic relief programs, improved policy-making, and measuring a loan’s impact on a business or industry. Ideally, this project should allow governments to reallocate PPP loan funds based on the county and GDP to ensure the loans are distributed equitably. The data from the PPP is a decisive tool for future businesses. It can help them understand how this program can contribute to their growth. Moreover, this data is invaluable for policymakers and analysts, as it can guide them in making informed decisions for future economic relief programs. It can also provide insights into whether the loans have positively or negatively impacted businesses and industries, further empowering decision-makers.
