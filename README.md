@@ -93,3 +93,45 @@ The people who will use this system are the financial institutions that issued t
 For this project, we will use three main sources of data: the U.S. Small Business Administration provides public records of PPP loan data, the Bureau of Economic Analysis contains GDP data for each county, and the U.S. Census Bureau provides data on the North American Industry Classification System (NAICS). 
 
 The PPP loan data has 13 CSV files, each containing more than 900,000 records. Each record contains information on a specific loan provided by the SBA offices. The NAICS data is an XLSX file, (which will be converted to CSV) with 2,126 records containing the industry codes, names, and descriptions.  This data contains duplicate records with the same industry containing multiple codes. The GDP has 1 CSV file with 9,535 records of the GDP of a specific state, county, or area. Each area is represented by three records in the table: real GDP, chain-type quantity indexes for real GDP, and current-dollar GDP. 
+
+## 5. Methods
+In this section, we will highlight some of the key tools and elements of our tech stack that we will be using for this project. As we learn and build upon our skills during this program, we hope to add additional tools to this section and improve upon some of our initial assumptions. Please include the following : 
+
+#### Information Architecture Diagram
+
+
+
+
+
+#### Data Architecture Diagram
+
+
+
+
+#### Dimensional Modeling Diagram
+
+
+
+
+#### Technical Architecture Diagram
+
+
+
+
+#### Data Pipelines/ ETL/ELT Diagram
+
+
+
+## 6. Data Tools
+##### Data Storage: What are the data storages that you are going to use? 
+For data storage, we will utilize cloud Storage, which includes Microsoft Azure. The storage we have is called stppp.
+
+##### Data Processing: How are you going to process/ingest the data? 
+We will use the ETL (Extracting, Transforming, and loading) process. 
+The data was collected raw, so it needs to be cleaned, and duplicates or sections that do not need to be analyzed will be removed. Then, the data will be converted into data types. All the converted datasets would come together and be stored in a database, allowing the user to efficiently obtain them when they are needed. 
+
+## Interface
+The final interface will be a web-based application where the Persona can visualize the results.  People should be able also to connect to your data using Tableau/PowerBI and do their own analysis.
+* Screenshot of all visualizations
+
+
