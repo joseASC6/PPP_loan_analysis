@@ -38,7 +38,7 @@ CREATE  TABLE PUBLIC.DIM_DATE (
 	QUARTER_NUMBER       integer    ,
 	DAY_NUMBER           integer    ,
 	HOUR_NUMBER          integer    ,
-	ISHOLIDAY            boolean    ,
+	DATE_ISO_FORMAT      datetime    ,
 	DAY_NAME             varchar(100)    ,
 	MONTH_NAME           varchar(100)    ,
 	WEEK_OF_MONTH        integer    ,
