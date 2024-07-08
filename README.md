@@ -99,18 +99,18 @@ In this section, we will highlight some of the key tools and elements of our tec
 
 #### 1. Information Architecture Diagram
 
-![alt text](datamodels/data_architecture_diagram.png)
-<img src="datamodels/data_architecture_diagram.png" width="48">
+<!-- ![alt text](datamodels/data_architecture_diagram.png) -->
+<img src="datamodels/data_architecture_diagram.png" width="100">
 
 #### 2. Data Architecture Diagram
 
-![alt text](datamodels/data_architecture_diagram.png)
-<img src="datamodels/data_architecture_diagram.png" width="20">
+<!-- ![alt text](datamodels/data_architecture_diagram.png) -->
+<img src="datamodels/data_architecture_diagram.png" width="100">
 
 #### 3. Dimensional Modeling Diagram
 
-![alt text](datamodels/Logical_Dimensional_Modeling_Diagram.png)
-<img src="datamodels/Logical_Dimensional_Modeling_Diagram.png" width="10">
+<!-- ![alt text](datamodels/Logical_Dimensional_Modeling_Diagram.png) -->
+<img src="datamodels/Logical_Dimensional_Modeling_Diagram.png" width="100">
 
 #### 4. Technical Architecture Diagram
 
