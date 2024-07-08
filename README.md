@@ -100,27 +100,26 @@ In this section, we will highlight some of the key tools and elements of our tec
 #### 1. Information Architecture Diagram
 
 
-
+![alt text](information_architecture_diagram.png)
 
 
 #### 2. Data Architecture Diagram
 
-
+<image missing>
 
 
 #### 3. Dimensional Modeling Diagram
 
-
-
+/Users/erikac/Documents/GitHub/PPP_loan_analysis/datamodels/Logical_Dimensional_Modeling_Diagram.png
 
 #### 4. Technical Architecture Diagram
 
 
-
+<image missing>
 
 #### 5. Data Pipelines/ ETL/ELT Diagram
 
-
+<image missing>
 
 ## 6. Data Tools
 #### Data Storage: What are the data storages that you are going to use? 
@@ -130,7 +129,7 @@ For data storage, we will utilize cloud Storage, which includes Microsoft Azure.
 We will use the ETL (Extracting, Transforming, and loading) process. 
 The data was collected raw, so it needs to be cleaned, and duplicates or sections that do not need to be analyzed will be removed. Then, the data will be converted into data types. All the converted datasets would come together and be stored in a database, allowing the user to efficiently obtain them when they are needed. 
 
-## Interface
+## 7. Interface
 The final interface will be a web-based application where the Persona can visualize the results.  People should be able also to connect to your data using Tableau/PowerBI and do their own analysis.
 * Screenshot of all visualizations
 
