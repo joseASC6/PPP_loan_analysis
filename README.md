@@ -105,21 +105,21 @@ In this section, we will highlight some of the key tools and elements of our tec
 
 #### 2. Data Architecture Diagram
 
-<image missing>
+datamodels/data_architecture_diagram.png
 
 
 #### 3. Dimensional Modeling Diagram
 
-/Users/erikac/Documents/GitHub/PPP_loan_analysis/datamodels/Logical_Dimensional_Modeling_Diagram.png
+datamodels/Logical_Dimensional_Modeling_Diagram.png
 
 #### 4. Technical Architecture Diagram
 
 
-<image missing>
+<missing>
 
 #### 5. Data Pipelines/ ETL/ELT Diagram
 
-<image missing>
+<missing>
 
 ## 6. Data Tools
 #### Data Storage: What are the data storages that you are going to use? 
