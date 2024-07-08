@@ -136,7 +136,7 @@
 			</fk>
 		</table>
 		<table name="facts_ppp" prior="Entity" >
-			<column name="facts_id" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="facts_ppp_id" prior="facts_id" type="BIGINT" jt="-5" mandatory="y" />
 			<column name="loan_number" type="INT" jt="4" />
 			<column name="naics_code" type="INT" jt="4" mandatory="y" />
 			<column name="geofips" type="INT" jt="4" mandatory="y" />
@@ -158,7 +158,7 @@
 			<column name="undisbursed_amount" type="DECIMAL" jt="3" />
 			<column name="forgiveness_amount" type="DECIMAL" jt="3" />
 			<index name="pk_facts_ppp" unique="PRIMARY_KEY" >
-				<column name="facts_id" />
+				<column name="facts_ppp_id" />
 			</index>
 			<fk name="fk_facts_ppp_dim_naics" to_schema="ppp_loan_lgl_dw.INSTANCE" to_table="dim_naics" type="NonIdentifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="naics_code" pk="naics_code" />

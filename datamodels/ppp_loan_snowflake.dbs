@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="ppp_loan_lgl_dw" id="Snowflake-a81" database="Snowflake" >
+<project name="ppp_loan_lgl_dw" id="Snowflake-bf0" database="Snowflake" >
 	<comment><![CDATA[Analysis of the PPP Loans that were issued to Small Businesses during COVID-19.]]></comment>
 	<schema name="INSTANCE" catalogname="ppp_loan_lgl_dw" >
 		<table name="DIM_BORROWER" prior="dim_borrower" >
@@ -41,7 +41,7 @@
 			<column name="QUARTER_NUMBER" prior="quarter_number" type="integer" jt="4" />
 			<column name="DAY_NUMBER" prior="day_number" type="integer" jt="4" />
 			<column name="HOUR_NUMBER" prior="hour_number" type="integer" jt="4" />
-			<column name="ISHOLIDAY" prior="isholiday" type="boolean" jt="16" />
+			<column name="DATE_ISO_FORMAT" prior="date_iso_format" type="datetime" jt="91" />
 			<column name="DAY_NAME" prior="day_name" type="varchar" length="100" jt="12" />
 			<column name="MONTH_NAME" prior="month_name" type="varchar" length="100" jt="12" />
 			<column name="WEEK_OF_MONTH" prior="week_of_month" type="integer" jt="4" />
@@ -136,7 +136,7 @@
 			</fk>
 		</table>
 		<table name="FACTS_PPP" prior="facts_ppp" >
-			<column name="FACTS_PPP_ID" prior="FACTS_ID" type="integer" jt="4" mandatory="y" />
+			<column name="FACTS_PPP_ID" prior="facts_ppp_id" type="integer" jt="4" mandatory="y" />
 			<column name="LOAN_NUMBER" prior="loan_number" type="integer" jt="4" />
 			<column name="NAICS_CODE" prior="naics_code" type="integer" jt="4" mandatory="y" />
 			<column name="GEOFIPS" prior="geofips" type="integer" jt="4" mandatory="y" />
@@ -204,7 +204,7 @@
 			</fk>
 		</table>
 	</schema>
-	<layout name="Default Layout" id="Layout-1865" confirmed="y" show_relation="columns" >
+	<layout name="Default Layout" id="Layout-1813" confirmed="y" show_relation="columns" >
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_BORROWER" color="C1D8EE" x="736" y="448" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_BUSINESS_AGE" color="C1D8EE" x="720" y="816" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_BUSINESS_TYPE" color="C1D8EE" x="928" y="720" />
@@ -214,12 +214,10 @@
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_NAICS" color="C1D8EE" x="80" y="528" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_ORIGINATING_LENDER" color="C1D8EE" x="48" y="656" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_PROCESSING_METHOD" color="C1D8EE" x="80" y="816" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SBA_OFFICE" color="C1D8EE" x="608" y="912" />
-		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SERVICING_LENDER" color="C1D8EE" x="304" y="896" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SBA_OFFICE" color="C1D8EE" x="672" y="928" />
+		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_SERVICING_LENDER" color="C1D8EE" x="448" y="896" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="DIM_TERM" color="C1D8EE" x="96" y="272" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="FACTS_GDP" color="C1D8EE" x="720" y="272" />
 		<entity schema="ppp_loan_lgl_dw.INSTANCE" name="FACTS_PPP" color="C1D8EE" x="400" y="384" />
-		<script name="ppp_loan_sql.sql" id="Editor-2224" language="SQL" file="file:/C:/Users/banan/Downloads/ppp_loan_sql.sql" />
-		<script name="ppp_loan_sql.sql" id="Editor-141e" language="SQL" file="file:/C:/Users/banan/Downloads/ppp_loan_sql.sql" />
 	</layout>
 </project>
