@@ -97,36 +97,36 @@ The PPP loan data has 13 CSV files, each containing more than 900,000 records. E
 ## 5. Methods
 In this section, we will highlight some of the key tools and elements of our tech stack that we will be using for this project. As we learn and build upon our skills during this program, we hope to add additional tools to this section and improve upon some of our initial assumptions. Please include the following : 
 
-#### Information Architecture Diagram
+#### 1. Information Architecture Diagram
 
 
 
 
 
-#### Data Architecture Diagram
+#### 2. Data Architecture Diagram
 
 
 
 
-#### Dimensional Modeling Diagram
+#### 3. Dimensional Modeling Diagram
 
 
 
 
-#### Technical Architecture Diagram
+#### 4. Technical Architecture Diagram
 
 
 
 
-#### Data Pipelines/ ETL/ELT Diagram
+#### 5. Data Pipelines/ ETL/ELT Diagram
 
 
 
 ## 6. Data Tools
-##### Data Storage: What are the data storages that you are going to use? 
+#### Data Storage: What are the data storages that you are going to use? 
 For data storage, we will utilize cloud Storage, which includes Microsoft Azure. The storage we have is called stppp.
 
-##### Data Processing: How are you going to process/ingest the data? 
+#### Data Processing: How are you going to process/ingest the data? 
 We will use the ETL (Extracting, Transforming, and loading) process. 
 The data was collected raw, so it needs to be cleaned, and duplicates or sections that do not need to be analyzed will be removed. Then, the data will be converted into data types. All the converted datasets would come together and be stored in a database, allowing the user to efficiently obtain them when they are needed. 
 
