@@ -129,7 +129,7 @@ We will use the ETL (Extracting, Transforming, and loading) process.
 The data was collected raw, so it needs to be cleaned, and duplicates or sections that do not need to be analyzed will be removed. Then, the data will be converted into data types. All the converted datasets would come together and be stored in a database, allowing the user to efficiently obtain them when they are needed. 
 
 ## 7. Interface
-The final interface will be a web-based application where the Persona can visualize the results.  People should be able also to connect to your data using Tableau/PowerBI and do their own analysis.
+The final interface will be a web-based application where the Persona can visualize the results. People should also be able to connect to your data using Tableau/PowerBI and do their own analysis.
 * Screenshot of all visualizations
 
 
