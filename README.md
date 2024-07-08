@@ -20,7 +20,7 @@ By Jose Garcia, Erika Chunzho and Gelbert Ramos
 6) Data Tools
 7) Interface
 
-## Business Problem
+## 1. Business Problem
 
 #### Context and Business Problem
 During the COVID-19 pandemic, the U.S. government established the Paycheck Protection Program (PPP). The program provided loans to small businesses to help them maintain their workforce during the pandemic. Most loans were forgivable if used primarily for payroll and other specified business expenses like utilities.
@@ -77,7 +77,7 @@ The PPP was designed to provide rapid financial assistance to small businesses n
         Integration with real-time economic indicators
         b. Fraud detection analysis
 
-## Business Impact
+## 2. Business Impact
 Analyzing PPP loans issued to small businesses during COVID-19 significantly impacts stakeholders, including government agencies, financial institutions, policymakers, and small business owners. The project's impacts include its risks, costs, and benefits.  
 
 This project's risks include data quality issues and privacy concerns. Some PPP loan data is incomplete, missing, or inconsistent from the rest, which could lead to a flawed or inaccurate conclusion. In addition, the PPP data contains sensitive information about the business owners. This project must ensure that it protects and secures this information.
@@ -85,3 +85,11 @@ This project's risks include data quality issues and privacy concerns. Some PPP 
 The cost of building the BI solutions is estimated at $40,000. The project is estimated to take 480 hours, and each team member will be paid $50 per hour, resulting in total labor costs of $32,000. In addition, the project includes $4,000 for software and tools, $2,000 for data acquisitions, and $2,000 for the project documentation.
 
 Lastly, project benefits include data-driven decision-making for future economic relief programs, improved policy-making, and measuring a loan’s impact on a business or industry. Ideally, this project should allow governments to reallocate PPP loan funds based on the county and GDP to ensure the loans are distributed equitably. The data from the PPP is a decisive tool for future businesses. It can help them understand how this program can contribute to their growth. Moreover, this data is invaluable for policymakers and analysts, as it can guide them in making informed decisions for future economic relief programs. It can also provide insights into whether the loans have positively or negatively impacted businesses and industries, further empowering decision-makers.
+
+## 3. Business Persona 
+The people who will use this system are the financial institutions that issued the PPP loans, government agencies overseeing the SBA, policymakers studying the impact of pandemic relief, business and financial analysts interested in analyzing PPP Loans, government and state officials, and the client, Professor Jefferson Bien-Aimé.
+
+## 4. Data
+For this project, we will use three main sources of data: the U.S. Small Business Administration provides public records of PPP loan data, the Bureau of Economic Analysis contains GDP data for each county, and the U.S. Census Bureau provides data on the North American Industry Classification System (NAICS). 
+
+The PPP loan data has 13 CSV files, each containing more than 900,000 records. Each record contains information on a specific loan provided by the SBA offices. The NAICS data is an XLSX file, (which will be converted to CSV) with 2,126 records containing the industry codes, names, and descriptions.  This data contains duplicate records with the same industry containing multiple codes. The GDP has 1 CSV file with 9,535 records of the GDP of a specific state, county, or area. Each area is represented by three records in the table: real GDP, chain-type quantity indexes for real GDP, and current-dollar GDP. 
