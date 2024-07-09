@@ -114,11 +114,11 @@ In this section, we will highlight some of the key tools and elements of our tec
 
 #### 4. Technical Architecture Diagram
 
-<missing>
+<img src="datamodels/technical_architecture_diagram.jpeg" width="400">
 
 #### 5. Data Pipelines/ ETL/ELT Diagram
 
-<missing>
+<img src="datamodels/data_pipelines_etl_diagram.jpeg" width="400">
 
 ## 6. Data Tools
 #### Data Storage: What are the data storages that you are going to use? 
