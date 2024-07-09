@@ -1,7 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS "ppp_loan";
 
 CREATE  TABLE "ppp_loan".dim_borrower ( 
-	borrower_id          INT  NOT NULL  ,
+	borrower_id          BIGINT  NOT NULL  ,
 	borrower_name        VARCHAR(200)    ,
 	borrower_address     VARCHAR(200)    ,
 	borrower_city        VARCHAR(100)    ,
@@ -36,7 +36,7 @@ CREATE  TABLE "ppp_loan".dim_date (
 	quarter_number       INT    ,
 	day_number           INT    ,
 	hour_number          INT    ,
-	date_iso_format      TIMESTAMP    ,
+	date_iso_format      timestamp    ,
 	day_name             VARCHAR(100)    ,
 	month_name           VARCHAR(100)    ,
 	week_of_month        INT    ,
@@ -67,7 +67,7 @@ CREATE  TABLE "ppp_loan".dim_naics (
  );
 
 CREATE  TABLE "ppp_loan".dim_originating_lender ( 
-	originating_lender_id INT  NOT NULL  ,
+	originating_lender_id BIGINT  NOT NULL  ,
 	originating_lender_location_id INT    ,
 	originating_lender   VARCHAR(200)    ,
 	originating_lender_city VARCHAR(200)    ,
@@ -87,13 +87,13 @@ CREATE  TABLE "ppp_loan".dim_sba_office (
  );
 
 CREATE  TABLE "ppp_loan".dim_servicing_lender ( 
-	servicing_lender_id  INT  NOT NULL  ,
+	servicing_lender_id  BIGINT  NOT NULL  ,
 	servicing_lender_location_id INT    ,
 	servicing_lender_name VARCHAR(200)    ,
 	servicing_lender_address VARCHAR(200)    ,
 	servicing_lender_city VARCHAR(100)    ,
 	servicing_lender_state VARCHAR(200)    ,
-	servicing_lender_zip INT    ,
+	servicing_lender_zip VARCHAR(200)    ,
 	CONSTRAINT pk_dim_servicing_lender PRIMARY KEY ( servicing_lender_id )
  );
 
@@ -102,6 +102,7 @@ CREATE  TABLE "ppp_loan".dim_term (
 	term_month           INT    ,
 	CONSTRAINT pk_dim_term PRIMARY KEY ( term_id )
  );
+
 
 CREATE  TABLE "ppp_loan".facts_gdp ( 
 	facts_gdp_id         INT  NOT NULL  ,
@@ -115,15 +116,15 @@ CREATE  TABLE "ppp_loan".facts_gdp (
 
 CREATE  TABLE "ppp_loan".facts_ppp ( 
 	facts_ppp_id         BIGINT  NOT NULL  ,
-	loan_number          INT    ,
+	loan_number          BIGINT    ,
 	naics_code           INT  NOT NULL  ,
 	geofips              INT  NOT NULL  ,
 	date_approved_id     BIGINT  NOT NULL  ,
 	loan_status_date_id  BIGINT  NOT NULL  ,
 	forgiveness_date_id  BIGINT  NOT NULL  ,
-	borrower_id          INT  NOT NULL  ,
-	originating_lender_id INT  NOT NULL  ,
-	servicing_lender_id  INT  NOT NULL  ,
+	borrower_id          BIGINT  NOT NULL  ,
+	originating_lender_id BIGINT  NOT NULL  ,
+	servicing_lender_id  BIGINT  NOT NULL  ,
 	term_id              INT  NOT NULL  ,
 	loan_status_id       INT  NOT NULL  ,
 	processing_method_id INT  NOT NULL  ,

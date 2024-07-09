@@ -42,7 +42,7 @@
 			<column name="quarter_number" type="INT" jt="4" />
 			<column name="day_number" type="INT" jt="4" />
 			<column name="hour_number" type="INT" jt="4" />
-			<column name="isholiday" type="BOOLEAN" jt="-7" />
+			<column name="date_iso_format" prior="isholiday" type="DATETIME" jt="93" />
 			<column name="day_name" type="VARCHAR" length="100" jt="12" />
 			<column name="month_name" type="VARCHAR" length="100" jt="12" />
 			<column name="week_of_month" type="INT" jt="4" />

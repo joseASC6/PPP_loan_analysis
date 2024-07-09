@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="ppp_loan_lgl_dw" id="AzurePostgreSQL-1385" database="AzurePostgreSQL" >
+<project name="ppp_loan_lgl_dw" id="AzurePostgreSQL-1dc4" database="AzurePostgreSQL" >
 	<comment><![CDATA[Analysis of the PPP Loans that were issued to Small Businesses during COVID-19.]]></comment>
 	<schema name="instance" catalogname="ppp_loan_lgl_dw" >
 		<table name="dim_borrower" >
-			<column name="borrower_id" type="INT" jt="4" mandatory="y" />
+			<column name="borrower_id" type="BIGINT" jt="-5" mandatory="y" />
 			<column name="borrower_name" type="VARCHAR" length="200" jt="12" />
 			<column name="borrower_address" type="VARCHAR" length="200" jt="12" />
 			<column name="borrower_city" type="VARCHAR" length="100" jt="12" />
@@ -76,7 +76,7 @@
 			</index>
 		</table>
 		<table name="dim_originating_lender" >
-			<column name="originating_lender_id" type="INT" jt="4" mandatory="y" />
+			<column name="originating_lender_id" type="BIGINT" jt="-5" mandatory="y" />
 			<column name="originating_lender_location_id" type="INT" jt="4" />
 			<column name="originating_lender" type="VARCHAR" length="200" jt="12" />
 			<column name="originating_lender_city" type="VARCHAR" length="200" jt="12" />
@@ -99,13 +99,13 @@
 			</index>
 		</table>
 		<table name="dim_servicing_lender" >
-			<column name="servicing_lender_id" type="INT" jt="4" mandatory="y" />
+			<column name="servicing_lender_id" type="BIGINT" jt="-5" mandatory="y" />
 			<column name="servicing_lender_location_id" type="INT" jt="4" />
 			<column name="servicing_lender_name" type="VARCHAR" length="200" jt="12" />
 			<column name="servicing_lender_address" type="VARCHAR" length="200" jt="12" />
 			<column name="servicing_lender_city" type="VARCHAR" length="100" jt="12" />
 			<column name="servicing_lender_state" type="VARCHAR" length="200" jt="12" />
-			<column name="servicing_lender_zip" type="INT" jt="4" />
+			<column name="servicing_lender_zip" type="VARCHAR" length="200" jt="12" />
 			<index name="pk_dim_servicing_lender" unique="PRIMARY_KEY" >
 				<column name="servicing_lender_id" />
 			</index>
@@ -137,15 +137,15 @@
 		</table>
 		<table name="facts_ppp" >
 			<column name="facts_ppp_id" type="BIGINT" jt="-5" mandatory="y" />
-			<column name="loan_number" type="INT" jt="4" />
+			<column name="loan_number" type="BIGINT" jt="-5" />
 			<column name="naics_code" type="INT" jt="4" mandatory="y" />
 			<column name="geofips" type="INT" jt="4" mandatory="y" />
 			<column name="date_approved_id" type="BIGINT" jt="-5" mandatory="y" />
 			<column name="loan_status_date_id" type="BIGINT" jt="-5" mandatory="y" />
 			<column name="forgiveness_date_id" type="BIGINT" jt="-5" mandatory="y" />
-			<column name="borrower_id" type="INT" jt="4" mandatory="y" />
-			<column name="originating_lender_id" type="INT" jt="4" mandatory="y" />
-			<column name="servicing_lender_id" type="INT" jt="4" mandatory="y" />
+			<column name="borrower_id" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="originating_lender_id" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="servicing_lender_id" type="BIGINT" jt="-5" mandatory="y" />
 			<column name="term_id" type="INT" jt="4" mandatory="y" />
 			<column name="loan_status_id" type="INT" jt="4" mandatory="y" />
 			<column name="processing_method_id" type="INT" jt="4" mandatory="y" />
@@ -204,7 +204,7 @@
 			</fk>
 		</table>
 	</schema>
-	<layout name="Default Layout" id="Layout-101" confirmed="y" show_relation="columns" >
+	<layout name="Default Layout" id="Layout-403" confirmed="y" show_relation="columns" >
 		<entity schema="ppp_loan_lgl_dw.instance" name="dim_borrower" color="C1D8EE" x="736" y="448" />
 		<entity schema="ppp_loan_lgl_dw.instance" name="dim_business_age" color="C1D8EE" x="720" y="816" />
 		<entity schema="ppp_loan_lgl_dw.instance" name="dim_business_type" color="C1D8EE" x="928" y="720" />
