@@ -128,8 +128,16 @@ We will use the ETL (Extracting, Transforming, and loading) process.
 The data was collected raw, so it needs to be cleaned, and duplicates or sections that do not need to be analyzed will be removed. Then, the data will be converted into data types. All the converted datasets would come together and be stored in a database, allowing the user to efficiently obtain them when they are needed. 
 
 ## 7. Interface
-<img src="docs/visualizations/Top 10 Lenders by State.png" width="400">
-<img src="docs/visualizations/Total Amount Per Industry PPP then PPS.png" width="400">
-<img src="docs/visualizations/Total Loan and Business by State.png" width="400">
-<img src="docs/visualizations/" width="400">
+![Loan-to-GDP Ratio by State and County](https://github.com/joseASC6/PPP_loan_analysis/assets/52749491/d08e57bc-0613-4c51-b672-d43d290d9ae2)
+![Loan-to-GDP Ratio by State](https://github.com/joseASC6/PPP_loan_analysis/assets/52749491/f16050b7-c27e-4f18-862c-3bba1eb7a613)
+![Top 10 Lenders by State](https://github.com/joseASC6/PPP_loan_analysis/assets/52749491/ee1ba20a-3a6a-458e-841c-6c89f7e01fb4)
+![Total Amount Per Industry PPP then PPS](https://github.com/joseASC6/PPP_loan_analysis/assets/52749491/f96a46da-65db-4b82-b0e9-8cf3b1cbc779)
+![Total Loan and Business by State](https://github.com/joseASC6/PPP_loan_analysis/assets/52749491/915e2f77-4c88-419c-bc46-d08fe2bd179c)
+![Total Loan by Borrower Companies](https://github.com/joseASC6/PPP_loan_analysis/assets/52749491/9eb857ce-2530-4564-92c0-94eae7d448b9)
+
+
+
+
+
+
 
