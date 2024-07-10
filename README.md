@@ -99,7 +99,7 @@ In this section, we will highlight some of the key tools and elements of our tec
 #### 1. Information Architecture Diagram
 
 <!-- ![alt text](datamodels/data_architecture_diagram.png) -->
-<img src="datamodels/data_architecture_diagram.png" width="400">
+<img src="datamodels/information_architecture_diagram.png" width="400">
 
 #### 2. Data Architecture Diagram
 
