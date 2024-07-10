@@ -136,6 +136,9 @@ Visuals created using Tableau
 ![Total Amount Per Industry PPP then PPS](https://github.com/joseASC6/PPP_loan_analysis/assets/52749491/f96a46da-65db-4b82-b0e9-8cf3b1cbc779)
 ![Total Loan and Business by State](https://github.com/joseASC6/PPP_loan_analysis/assets/52749491/915e2f77-4c88-419c-bc46-d08fe2bd179c)
 ![Total Loan by Borrower Companies](https://github.com/joseASC6/PPP_loan_analysis/assets/52749491/9eb857ce-2530-4564-92c0-94eae7d448b9)
+![Distribution of PPP Loans by State ](https://github.com/joseASC6/PPP_loan_analysis/assets/52749491/c9b2cff5-b91d-4c34-8d16-651d85d720fa)
+<img width="812" alt="Classifcation by NAICS" src="https://github.com/joseASC6/PPP_loan_analysis/assets/52749491/249e2cab-eb15-4cf3-9c75-c41abe31ee41">
+<img width="779" alt="Total Loan by Company" src="https://github.com/joseASC6/PPP_loan_analysis/assets/52749491/201c55f8-9994-483d-a10b-301ece584de0">
 
 
 
