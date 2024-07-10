@@ -40,10 +40,9 @@ The PPP was designed to provide rapid financial assistance to small businesses n
 1. Loan-to-GDP Ratio: Measures the proportion of PPP loans relative to the economic output of counties and states.
     * Ratio to compare the total loan amount allocated vs GDP by county and states
     * (Total Loan Amount / GDP) * 100
-2. Industry Impact Ratio: Compares the proportion of loans given to an industry relative to its economic contribution.
+2. Nice to have: Industry Impact Ratio: Compares the proportion of loans given to an industry relative to its economic contribution.
     * (Loan Amount to Industry / Total Loan Amount) / (Industry GDP / Total GDP)
-3. Rural vs. Urban Loan Allocation: Assesses the balance of loan distribution between rural and urban areas.
-    * (Rural Loan Amount / Total Loan Amount) / (Rural Population / Total Population)
+
 
 ### Functional Requirements 
 #### Business Intelligence Use Cases:
